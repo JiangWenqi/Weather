@@ -15,22 +15,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cn.edu.bistu.cs.login.WelcomeActivity">
+        <activity android:name="cn.edu.bistu.cs.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectCityActivity"></activity>
-        <activity android:name="cn.edu.bistu.cs.weather.WeatherActivity"></activity>
+        <activity android:name="cn.edu.bistu.cs.menu.SelectCityActivity">
+
+        </activity>
+        <activity android:name="cn.edu.bistu.cs.weather.WeatherActivity">
+
+        </activity>
         <activity
             android:name="cn.edu.bistu.cs.login.RegisterActivity"
             android:label="@string/title_activity_register">
 
         </activity>
         <activity
-            android:name="cn.edu.bistu.cs.login.LoginActivity"
+            android:name="cn.edu.bistu.cs.login.WelcomeActivity"
             android:label="WelcomeActivity">
+
+        </activity>
+        <activity android:name="cn.edu.bistu.cs.menu.MenuAcitvity">
 
         </activity>
     </application>

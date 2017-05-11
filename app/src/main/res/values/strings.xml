@@ -12,5 +12,8 @@
     <string name="et_user_text">用户名</string>
     <string name="SelectCity_text">选择城市</string>
     <string name="hint_words">输入全国城市（汉字、拼音）</string>
+    <string name="add_city">添加城市</string>
+    <string name="remember_password">记住密码</string>
+    <string name="login_auto">自动登录</string>
 
 </resources>

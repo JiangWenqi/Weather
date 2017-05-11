@@ -34,14 +34,39 @@ public class WelcomeActivity extends Activity {
         //获取SharedPreference里存储的username
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPreference", Activity.MODE_PRIVATE);
         userName = sharedPreferences.getString("username", "");
-        //如果目前没有username传过来就回到loginActivity
-        if(userName.equals("")){
-            Intent intent = new Intent(WelcomeActivity.this,LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }else{
+        //如果目前没有SharedPreference里没有username传过来，就从Intent里获取
+        if (userName.equals("")) {
+            //从Intent获取username
+            userName = this.getIntent().getExtras().getString("username");
+            if (userName.equals("")) {
+                //如果Intent里面也没有用户名的话，就返回登陆页面;
+                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                //如果Intent有uername的话就把uername加载到SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username", userName);
+                editor.commit();
+
+                 /* 获取当前小时，进行相应提示 */
+                setNotice();
+                //设置定时器自动跳转
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(WelcomeActivity.this, WeatherActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task, 888);
+            }
+        } else {//如果目前没有SharedPreference里有username传过来，就直接显示提示信息
         /* 获取当前小时，进行相应提示 */
             setNotice();
+            //设置定时器自动跳转
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
@@ -51,10 +76,8 @@ public class WelcomeActivity extends Activity {
                 }
             };
             Timer timer = new Timer();
-            timer.schedule(task, 1000);
+            timer.schedule(task, 888);
         }
-//         获得从登录页传递过来的用户名
-//        userName = this.getIntent().getExtras().getString("userName");
     }
 
 

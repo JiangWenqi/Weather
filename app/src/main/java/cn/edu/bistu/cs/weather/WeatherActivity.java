@@ -24,21 +24,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import cn.edu.bistu.cs.bean.TodayWeather;
+import cn.edu.bistu.cs.menu.MenuAcitvity;
 
 /**
  * Created by Vinci on 2017-5-4.
  */
 
 public class WeatherActivity extends Activity implements View.OnClickListener {
-    private final String TAG = "MainActivity";//用于日志记录
     private static final int UPDATE_TODAY_WEATHER = 1;
+    private final String TAG = "MainActivity";//用于日志记录
+    TodayWeather todayWeather;
     private long exitTime;               // 退出时间
-
     private TextView cityTv, timeTv, humidityTv, weekTv, pmDataTv, pmQualityTv,
             temperatureTv, climateTv, windTv, city_name_Tv;
     private ImageView weatherImg, PM25Img;
-
-    TodayWeather todayWeather;
     /**
      * 通过消息机制，将解析的天气对象，通过消息发送给主线程，主线程接收到消息数
      * 据后，调用updateTodayWeather函数，更新UI界面上的数据。
@@ -64,8 +63,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         //加载更新按钮布局，并设置监听
         ImageView updateBtn = (ImageView) findViewById(R.id.title_update_btn);
         updateBtn.setOnClickListener(this);
-        //加载选择城市按钮布局，并设置监听
-        ImageView selectCityBtn = (ImageView) findViewById(R.id.title_city_manager);
+        //加载菜单按钮布局，并设置监听
+        ImageView selectCityBtn = (ImageView) findViewById(R.id.title_menu);
         selectCityBtn.setOnClickListener(this);
         //初始化布局文件
         initView();
@@ -83,10 +82,11 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.title_city_manager) {
-            Intent intent = new Intent(this, SelectCityActivity.class);
-            startActivityForResult(intent, 1);
-            finish();
+        if (view.getId() == R.id.title_menu) {
+//            Intent intent = new Intent(this, SelectCityActivity.class);
+//            startActivityForResult(intent, 1);
+            Intent intent = new Intent(this, MenuAcitvity.class);
+            startActivity(intent);
         }
         if (view.getId() == R.id.title_update_btn) {
             SharedPreferences sharedPreferences = getSharedPreferences("CityCodePreference", Activity.MODE_PRIVATE);
@@ -168,7 +168,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
             xmlPullParser.setInput(new StringReader(xmlData));
             int eventType = xmlPullParser.getEventType();
             Log.d(TAG, "start parse xml");
-            while (eventType != xmlPullParser.END_DOCUMENT) {
+            while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
                     //文档开始位置
                     case XmlPullParser.START_DOCUMENT:

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/like_city_title"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dp"
+        android:background="#ffcd2626">
+        <!--选择城市界面，标题处：当前城市名称-->
+        <TextView
+            android:id="@+id/title_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="@string/add_city"
+            android:textColor="#ffffffff"
+            android:textSize="20.0dp" />
+
+        <ImageView
+            android:id="@+id/like_city_title_back"
+            android:layout_width="45.0dp"
+            android:layout_height="45.0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/base_action_bar_back_normal" />
+
+        <ImageView
+            android:layout_width="1.0dip"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_toRightOf="@id/like_city_title_back"
+            android:background="#A71717"
+            android:gravity="center" />
+
+    </RelativeLayout>
+    <!--title结束-->
+    <LinearLayout
+        android:id="@+id/menu_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/like_city_title"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_add_city"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:text="添加城市"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_login_out"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:text="退出登陆"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <!--喜爱城市列表-->
+    <ListView
+        android:id="@+id/like_city_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/menu_select"
+        android:background="#06413531"></ListView>
+</RelativeLayout>

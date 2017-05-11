@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by Vinci on 2017-5-4.
  */
@@ -40,6 +42,7 @@ public class DBDao {
         return rows;
     }
 
+
     /**
      * @param userName
      * @param userPass
@@ -55,9 +58,36 @@ public class DBDao {
         Cursor c = db.rawQuery(sql, null);
         Log.d("SQLite", "执行查询语句");
         int rows = c.getCount();
-        Log.d("SQLite", "查询结果:"+rows);
+        Log.d("SQLite", "查询结果:" + rows);
+        dbHelper.close();
+        db.close();
+        return rows;
+
+    }
+
+    public long addLikeCity(String userName, String cityCode) {
+        db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("userName", userName);
+        values.put("cityCode", cityCode);
+        long rows = db.insert("likecity", null, values);
         dbHelper.close();
         db.close();
         return rows;
     }
+
+    public ArrayList<String> findLikeCity(String uerName) {
+        ArrayList<String> likeCityCodes = new ArrayList<>();
+        db = dbHelper.getReadableDatabase();
+        String sql = "select cityCode from likecity where userName = '" + uerName + "'";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            String cityCode = cursor.getString(cursor.getColumnIndex("cityCode"));
+            likeCityCodes.add(cityCode);
+        }
+        dbHelper.close();
+        db.close();
+        return likeCityCodes;
+    }
+
 }

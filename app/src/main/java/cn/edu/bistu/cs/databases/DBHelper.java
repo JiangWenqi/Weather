@@ -23,12 +23,14 @@ public class DBHelper extends SQLiteOpenHelper{
     public static final int DB_VERSION = 1;
     // 数据库名称
     public static final String DB_NAME = "login";
-    // 表名
+    // 注册表名
     public final static String TABLE_NAME = "user";
-
-    // 建表语句
-    private static final String CREATE_TABLE =  "create table if not exists user" +
+    // 建注册表语句
+    private static final String CREATE_USER_TABLE = "create table if not exists user" +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, userName TEXT, userPass Text)";
+
+    private static final String CREATE_LIKE_TABLE = "create table if not exists likecity" +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, userName TEXT, cityCode Text)";
 
     /**
      * <p>Title: DataBaseHelper</p>
@@ -52,7 +54,8 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         // 执行建表语句
-        db.execSQL(CREATE_TABLE);
+        db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_LIKE_TABLE);
     }
 
     /* (非 Javadoc)
@@ -67,5 +70,4 @@ public class DBHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d("onUpgrade", "update database：oldVersion = "+oldVersion+", new Version ="+newVersion);
     }
-
 }
